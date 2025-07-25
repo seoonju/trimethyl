@@ -11,7 +11,7 @@ var prompt = require('prompt');
 var ga = require('universal-analytics')(package.ua);
 var child_process = require('child_process');
 var async = require('async');
-var md5 = require('md5');
+var crypto = require('crypto'); // Use crypto module for secure hashing
 
 // Current directory
 var CWD = process.cwd();
@@ -320,7 +320,7 @@ function installLib(lib, callback) {
 	if (fs.existsSync(lib.dst_file)) {
 		fs.readFile(lib.src_file, function(err, src_buf) {
 			fs.readFile(lib.dst_file, function(err, dst_buf) {
-				if (err != null || (md5(src_buf) != md5(dst_buf))) {
+				if (err != null || (crypto.createHash('sha256').update(src_buf).digest('hex') != crypto.createHash('sha256').update(dst_buf).digest('hex'))) {
 					effectiveCopy();	
 				} else {
 					process.stdout.write(tn.grey + 'Up-to-date '.grey + lib.name.bold.white + "\n");

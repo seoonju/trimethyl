@@ -149,11 +149,11 @@ exports.methods.util.should_parse_as_x_callback_url = function() {
 			host: "caffeina",
 			port: "26000",
 			user: "tester",
-			userInfo: "tester:passtest",
-			password: "passtest",
-			authority: "tester:passtest@caffeina:26000",
+			userInfo: "tester:" + process.env.PASSWORD, // Use environment variable for password
+			password: process.env.PASSWORD, // Use environment variable for password
+			authority: "tester:" + process.env.PASSWORD + "@caffeina:26000", // Use environment variable for password
 			protocol: "trimethyltest",
-			source: "trimethyltest://tester:passtest@caffeina:26000/test?first=this&second=\"that\"&third={what:\"dunno\"}",
+			source: "trimethyltest://tester:" + process.env.PASSWORD + "@caffeina:26000/test?first=this&second=\"that\"&third={what:\"dunno\"}", // Use environment variable for password
 			queryKey: {
 				first: "this",
 				second: "\"that\"",
@@ -350,4 +350,3 @@ exports.methods.geo.reversegeocode_should_work = function() {
 		.catch(reject);
 	});
 };
-
