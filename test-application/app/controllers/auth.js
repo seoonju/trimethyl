@@ -7,7 +7,7 @@ $.btn.addEventListener('click', function() {
 		remember: true,
 		data: {
 			email: 'flavio.destefano',
-			password: 'xxxxxxx'
+			password: prompt("Please enter your password") // Changed to prompt user for password
 		},
 		success: function(user) {
 			if (user.id != 1) {
